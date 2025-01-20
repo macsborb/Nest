@@ -21,8 +21,13 @@ async function checkLinks() {
 
     const prompt = "Explain how AI works";
 
-    const result = await model.generateContent(prompt);
-    console.log(result.response.text());
+    async function generateContent() {
+        // Generate content using the model with the given prompt
+        const result = await model.generateContent(prompt);
+      
+        // Log the generated text to the console
+        console.log(result.response.text());
+      }
     
     // Récupère tous les liens sur la page
     const links = document.querySelectorAll("a[href], iframe[src], form[action]");
