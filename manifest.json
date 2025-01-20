@@ -24,7 +24,8 @@
         "16": "icon.jpg",
         "48": "icon.jpg",
         "128": "icon.jpg"
-      }
+      },
+      "default_popup":"index.html"
     }
   }
   
