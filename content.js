@@ -13,7 +13,17 @@ function markSafeLink(linkElement) {
 }
 
 // Fonction pour vérifier les liens sur la page
-function checkLinks() {
+async function checkLinks() {
+    const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+    const genAI = new GoogleGenerativeAI("AIzaSyDXGwd1sUkBZoxTOX-VUYpRhl6SiLQBdW8");
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const prompt = "Explain how AI works";
+
+    const result = await model.generateContent(prompt);
+    console.log(result.response.text());
+    
     // Récupère tous les liens sur la page
     const links = document.querySelectorAll("a[href], iframe[src], form[action]");
     const urlsToCheck = Array.from(links).map((link) => {
@@ -50,7 +60,6 @@ function checkLinks() {
     })
     .then((response) => response.json())
     .then((data) => {
-        console.log(fraudulentUrls)
         const fraudulentUrls = data.matches ? data.matches.map((match) => match.threat.url) : [];
 
         // Marquer les liens en fonction des résultats
